@@ -1,0 +1,1 @@
+include ':example', ':Wangqi_Annotations', ':Wangqi_compiler', ':Wangqi_core', ':wangqi_ec'
