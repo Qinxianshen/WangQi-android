@@ -1,10 +1,15 @@
 package com.wangqi.wangqishop.wangqi_core.app;
 
+import com.joanzapata.iconify.IconFontDescriptor;
+import com.joanzapata.iconify.Iconify;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 //存取配置信息
 public class Configurator {
     private static final HashMap<String, Object> WANGQI_CONFIGS = new HashMap<>();
+    private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
 
     private Configurator() {
         //告诉配置文件 开始配置 但未配置完毕
@@ -27,6 +32,7 @@ public class Configurator {
 
     //告诉配置文件 已经配置完成
     public final void configure(){
+        initIcons();
         WANGQI_CONFIGS.put(ConfigType.CONFIG_READY.name(),true);
     }
     //ApiHost配置
@@ -34,6 +40,21 @@ public class Configurator {
         WANGQI_CONFIGS.put(ConfigType.API_HOST.name(), host);
         return this;
     }
+    //icon配置
+
+    private void initIcons() {
+        if (ICONS.size() > 0) {
+            final Iconify.IconifyInitializer initializer = Iconify.with(ICONS.get(0));
+            for (int i = 1; i < ICONS.size(); i++) {
+                initializer.with(ICONS.get(i));
+            }
+        }
+    }
+    public final Configurator withIcon(IconFontDescriptor descriptor) {
+        ICONS.add(descriptor);
+        return this;
+    }
+
 
     //检查配置是否完成
     private void checkConfiguration() {

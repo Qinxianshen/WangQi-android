@@ -15,9 +15,22 @@ public final class Wangqi {
         return Configurator.getInstance();
     }
 
-    //获得配置类句柄
+
     private static HashMap<String, Object> getConfigurations(){
         return Configurator.getInstance().getWangqiConfigs();
+    }
+
+    //获得配置类句柄
+    public static Configurator getConfigurator() {
+        return Configurator.getInstance();
+    }
+    //通过Key获得到具体的某一个配置
+    public static <T> T getConfiguration(Object key) {
+        return getConfigurator().getConfiguration(key);
+    }
+    //获得应用的上下文句柄
+    public static Context getApplicationContext() {
+        return getConfiguration(ConfigType.APPLICATION_CONTEXT);
     }
 
 
